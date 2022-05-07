@@ -1,11 +1,11 @@
 //imports elements, assign to variables
-var canvas = document.getElementById("pixelCanvas");
-var color = document.getElementById("colorPicker");
-var sizePicker = document.getElementById("sizePicker");
+var canvas = document.getElementById("canvas");
+var color = document.getElementById("colorChange");
+var sizePicker = document.getElementById("sizeChange");
 var height = document.getElementById("inputHeight");
 var width = document.getElementById("inputWidth");
-var toggle = document.getElementById("gridToggle");
-var save = document.getElementById("saveArt");
+var toggle = document.getElementById("toggleGrid");
+var save = document.getElementById("saveCanvas");
 
 //creating grid and assign event listeners
 function makeGrid(height, width) {
@@ -13,9 +13,9 @@ function makeGrid(height, width) {
         let row = canvas.insertRow(y);
         for (let x = 0; x < width; x++) {
             let cell = row.insertCell(x);
-            cell.addEventListener("mousedown", function(evt) {
+            cell.addEventListener("mousedown", function(event) {
                 cell.style.backgroundColor = color.value;
-            cell.addEventListener("contextmenu", function(evt) {
+            cell.addEventListener("contextmenu", function(event) {
                 evt.preventDefault();
                 cell.style.backgroundColor = "white";
             } )
@@ -37,7 +37,7 @@ toggle.addEventListener("click", function() {
 });
 
 //size picker submit to call makeGrid() funtion
-sizePicker.addEventListener("submit", function(evt) {
+sizePicker.addEventListener("submit", function(event) {
     evt.preventDefault();
     while (canvas.hasChildNodes()) {
         canvas.removeChild(canvas.lastChild);
@@ -46,7 +46,7 @@ sizePicker.addEventListener("submit", function(evt) {
 });
 
 //let's us save the canvas
-save.addEventListener("click", function(evt) {
+save.addEventListener("click", function(event) {
     evt.preventDefault();
     html2canvas(canvas).then(canvas => {
         document.body.appendChild(canvas)
